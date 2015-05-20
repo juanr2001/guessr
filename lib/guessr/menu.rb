@@ -3,6 +3,7 @@ module Guessr
     def initialize
       @player = nil
       @game = nil
+
     end
 
     def choose_player
@@ -50,8 +51,16 @@ module Guessr
       end
     end
 
+    def score_board
+      puts "Scores"
+      Guessr::Player.order(score: :desc).each do | player |
+        puts "#{player.name} -- #{player.score}"
+      end
+    end
+
     def run
       welcome
+      score_board()
       choose_player
       while play_again?
         choose_game
